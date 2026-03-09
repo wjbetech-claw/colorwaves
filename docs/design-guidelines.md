@@ -30,3 +30,12 @@ Accessibility
 Micro-interactions
 - Subtle transitions only (fade/scale 120ms–200ms)
 - Respect reduced-motion preference
+
+Theme and color schemes
+- Use daisyUI's full color scheme system to offer tasteful, accessible themes.
+- Provide a navbar theme toggler (simple control in the header) that lets users switch between daisyUI themes (e.g., "light", "dark", and one soft accent theme).
+- Toggler behavior:
+  - Persist user choice in localStorage so returning visitors keep their preference.
+  - Apply theme to the root (html or body) using the daisyUI data-theme attribute.
+  - Ensure all theme options meet contrast and accessibility guidelines (WCAG AA for text).
+  - Keep transitions subtle and respect prefers-reduced-motion.
