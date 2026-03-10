@@ -19,6 +19,9 @@ function prefers(): Theme | null {
 }
 
 export default function ThemeToggler(){
+  // PR marker: ensure branch differs from main
+
+  const [theme, setTheme] = useState<Theme>(() => (typeof window !== 'undefined' && getStored()) || 'light')
   const [theme, setTheme] = useState<Theme>(() => {
     if(typeof window === 'undefined') return 'light'
     return (getStored() || prefers() || 'light') as Theme
