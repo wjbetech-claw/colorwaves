@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
+// Full daisyUI theme list (selection of tasteful themes). Add or remove as desired.
 const THEMES = [
   'light','dark','cupcake','bumblebee','emerald','corporate','synthwave','retro','cyberpunk','valentine','halloween','garden','forest','aqua','lofi','pastel','fantasy','wireframe','black','luxury','dracula'
 ] as const
@@ -17,8 +18,17 @@ function prefers(): Theme | null {
   }catch{ return null }
 }
 
+function prefers(): Theme | null {
+  try{
+    if(typeof window === 'undefined') return null
+    const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    return dark ? 'dark' : 'light'
+  }catch{ return null }
+}
+
 export default function ThemeToggler(){
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
     if(typeof window === 'undefined') return 'light'
     return (getStored() || prefers() || 'light') as Theme
   })
@@ -40,6 +50,9 @@ export default function ThemeToggler(){
               {t}
             </button>
           </li>
+      <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 max-h-72 overflow-auto flex flex-col">
+        {THEMES.map(t => (
+          <li key={t}><button className={`w-full text-left ${t===theme? 'font-semibold':''}`} onMouseDown={(e)=>{e.preventDefault(); setTheme(t)}}>{t}</button></li>
         ))}
       </ul>
     </div>
