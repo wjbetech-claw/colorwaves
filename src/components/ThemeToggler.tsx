@@ -76,12 +76,12 @@ export default function ThemeToggler() {
       </button>
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box bg-base-100 p-2 shadow w-52 max-h-72 overflow-auto flex flex-col gap-1">
+        className="dropdown-content menu rounded-box bg-base-100 p-2 shadow max-h-72 overflow-auto flex flex-col gap-1 w-52 whitespace-normal">
         {THEMES.map((item) => (
           <li key={item} className="w-full">
             <button
               type="button"
-              className={`w-full rounded px-2 py-1 text-left ${item === theme ? "bg-base-200 font-semibold" : ""}`}
+              className={`block w-full rounded px-2 py-1 text-left ${item === theme ? "bg-base-200 font-semibold" : ""}`}
               onMouseDown={(event) => {
                 event.preventDefault();
                 setTheme(item);
