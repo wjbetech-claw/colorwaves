@@ -26,3 +26,29 @@ Contributing
 
 License
 - MIT (add a LICENSE file in a follow-up change)
+
+
+Design tokens (quick reference)
+
+- File: src/styles/tokens.css
+
+Example tokens:
+```
+:root{
+  --color-bg: #ffffff;
+  --color-panel: #ffffff;
+  --color-text: #0f172a;
+  --color-primary-500: #6366f1;
+  --color-border: #e6e9ef;
+}
+
+html[data-theme='dark']{
+  --color-bg: #0b1220;
+  --color-text: #e6eef8;
+}
+```
+
+Usage
+- Use CSS variables directly in small custom styles, or reference them in utility classes.
+- Example: class="bg-[var(--color-panel)] text-[var(--color-text)]"
+
