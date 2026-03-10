@@ -4,6 +4,7 @@ import SubNav from './SubNav'
 
 export default function Header(){
   return (
+    <>
     <header className="border-b border-[var(--color-border)] bg-[var(--color-bg)]">
       <div className="mx-auto px-4" style={{maxWidth:980}}>
         <nav className="flex items-center justify-between h-16">
@@ -14,6 +15,7 @@ export default function Header(){
         </nav>
       </div>
     </header>
-<SubNav />
+    <SubNav />
+    </>
   )
 }
