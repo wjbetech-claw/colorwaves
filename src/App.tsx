@@ -1,32 +1,29 @@
 import React from 'react'
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import Container from './components/layout/Container'
 import { SOUNDS } from './data/sounds'
 import SoundCard from './components/SoundCard'
-import ThemeToggler from './components/ThemeToggler'
 
 export default function App(){
   return (
-    <div className="min-h-screen bg-base-100 text-base-content p-6">
-      <header className="container mx-auto">
-        <nav className="flex items-center justify-between py-4">
-          <h1 className="text-2xl font-semibold">Colorwaves</h1>
-          <div>
-            <ThemeToggler />
-          </div>
-        </nav>
-      </header>
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      <Header />
+      <main className="py-8">
+        <Container>
+          <section className="mb-6">
+            <h2 className="h2">Explore sound colors</h2>
+            <p className="body-large text-[var(--color-text-muted)]">Short, accurate definitions and simple previews for common sound colors.</p>
+          </section>
 
-      <main className="container mx-auto mt-8">
-        <section className="prose max-w-none mb-6">
-          <h2 className="text-3xl font-semibold">Explore sound colors</h2>
-          <p className="text-muted-foreground">Short, accurate definitions and simple previews for common sound colors.</p>
-        </section>
-
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {SOUNDS.map(s => (
-            <SoundCard key={s.id} sound={s} />
-          ))}
-        </section>
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SOUNDS.map(s => (
+              <SoundCard key={s.id} sound={s} />
+            ))}
+          </section>
+        </Container>
       </main>
+      <Footer />
     </div>
   )
 }
