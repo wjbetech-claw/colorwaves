@@ -1,20 +1,48 @@
 import React from 'react'
+import Card from './ui/Card'
 import { SoundColor } from '../data/sounds'
 
 export default function SoundCard({sound}:{sound:SoundColor}){
+  // simple color mapping for accents
+  const ACCENTS: Record<string,string> = {
+    white: 'bg-white',
+    pink: 'bg-pink-300',
+    brown: 'bg-amber-700',
+    blue: 'bg-blue-400',
+    violet: 'bg-purple-400',
+    grey: 'bg-gray-400',
+    ocean: 'bg-sky-400',
+    fan: 'bg-stone-400'
+  }
+
+  const accent = ACCENTS[sound.id] || 'bg-[var(--color-primary-500)]'
+
   return (
-    <article className="card bg-base-200 shadow-sm p-4">
-      <div className="card-body p-0">
-        <h3 className="text-lg font-medium">{sound.name}</h3>
-        <p className="text-sm text-muted-foreground">{sound.short}</p>
-        <p className="mt-2 text-sm">{sound.tone}</p>
-        <ul className="mt-3 text-xs text-muted-foreground">
-          {sound.uses.map(u=> <li key={u}>• {u}</li>)}
-        </ul>
-        <div className="mt-4">
-          <button className="btn btn-sm">Preview</button>
+    <Card>
+      <div className="flex items-start gap-4">
+        <div className={`w-2 h-12 rounded ${accent} shrink-0`} aria-hidden></div>
+        <div className="flex-1">
+          <h3 className="h3">{sound.name}</h3>
+          <p className="small text-[var(--color-text-muted)]">{sound.short}</p>
         </div>
+        <div className="w-16 h-12 bg-[var(--color-panel)] rounded flex items-center justify-center text-xs text-[var(--color-text-muted)]">Img</div>
       </div>
-    </article>
+
+      <div className="mt-3">
+        <p className="body">{sound.tone}</p>
+        <ul className="mt-3 text-xs text-[var(--color-text-muted)] list-none space-y-1">
+          {sound.uses.map(u=> <li key={u} className="text-xs">• {u}</li>)}
+        </ul>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <div>
+          <button className="px-3 py-1 rounded bg-[var(--color-primary-500)] text-white mr-2" aria-pressed="false">Play</button>
+          <button className="px-3 py-1 rounded border border-[var(--color-border)]">Preview</button>
+        </div>
+        <div className="text-xs text-[var(--color-text-muted)]">Preview · 8s</div>
+      </div>
+
+    </Card>
   )
 }
