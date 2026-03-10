@@ -31,9 +31,9 @@ export default function ThemeToggler(){
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost" aria-label="Theme chooser">Theme</label>
-      <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 max-h-72 overflow-auto">
+      <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 max-h-72 overflow-auto flex flex-col">
         {THEMES.map(t => (
-          <li key={t}><button className={`w-full text-left ${t===theme? 'font-semibold':''}`} onClick={()=>setTheme(t)}>{t}</button></li>
+          <li key={t}><button className={`w-full text-left ${t===theme? 'font-semibold':''}`} onMouseDown={(e)=>{e.preventDefault(); setTheme(t)}}>{t}</button></li>
         ))}
       </ul>
     </div>
