@@ -1,6 +1,7 @@
 import React from 'react'
 import { SOUNDS } from './data/sounds'
 import SoundCard from './components/SoundCard'
+import ThemeToggler from './components/ThemeToggler'
 
 export default function App(){
   return (
@@ -9,7 +10,7 @@ export default function App(){
         <nav className="flex items-center justify-between py-4">
           <h1 className="text-2xl font-semibold">Colorwaves</h1>
           <div>
-            <button className="btn btn-ghost">Theme</button>
+            <ThemeToggler />
           </div>
         </nav>
       </header>
