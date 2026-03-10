@@ -1,5 +1,6 @@
 import React from 'react'
 import ThemeToggler from '../ThemeToggler'
+import SubNav from './SubNav'
 
 export default function Header(){
   return (
@@ -13,5 +14,6 @@ export default function Header(){
         </nav>
       </div>
     </header>
+<SubNav />
   )
 }
