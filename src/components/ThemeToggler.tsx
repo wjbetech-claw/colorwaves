@@ -8,6 +8,8 @@ function getStored(): Theme | null {
 }
 
 export default function ThemeToggler(){
+  // PR marker: ensure branch differs from main
+
   const [theme, setTheme] = useState<Theme>(() => (typeof window !== 'undefined' && getStored()) || 'light')
 
   useEffect(()=>{
