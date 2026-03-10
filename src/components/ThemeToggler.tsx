@@ -10,18 +10,18 @@ function getStored(): Theme | null {
 export default function ThemeToggler(){
   // PR marker: ensure branch differs from main
 
-  const [theme, setTheme] = useState<Theme>(() => (typeof window !== 'undefined' && getStored()) || 'light')
+  const [currentTheme, setCurrentTheme] = useState<Theme>(() => (typeof window !== 'undefined' && getStored()) || 'light')
 
   useEffect(()=>{
-    try{ document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('cw:theme', theme) }catch{}
-  },[theme])
+    try{ document.documentElement.setAttribute('data-theme', currentTheme); localStorage.setItem('cw:theme', currentTheme) }catch{}
+  },[currentTheme])
 
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost" aria-label="Theme chooser">Theme</label>
       <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
         {THEMES.map(t => (
-          <li key={t}><button className={`w-full text-left ${t===theme? 'font-semibold':''}`} onClick={()=>setTheme(t)}>{t}</button></li>
+          <li key={t}><button className={`w-full text-left ${t===currentTheme? 'font-semibold':''}`} onClick={()=>setCurrentTheme(t)}>{t}</button></li>
         ))}
       </ul>
     </div>
