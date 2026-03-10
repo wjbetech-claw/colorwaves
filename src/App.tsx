@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Landing from './components/Landing'
+import Container from './components/layout/Container'
 
 export default function App(){
   return (
