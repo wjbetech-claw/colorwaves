@@ -7,7 +7,7 @@ export default function App(){
         <nav className="flex items-center justify-between py-4">
           <h1 className="text-2xl font-semibold">Colorwaves</h1>
           <div>
-            <!-- theme toggler placeholder -->
+            {/* theme toggler placeholder */}
             <button className="btn btn-ghost">Theme</button>
           </div>
         </nav>
