@@ -7,10 +7,9 @@ export default function App(){
   return (
     <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
       <Header />
-      <main>
-        <Landing />
       <main className="py-12">
         <Container>
+          <Landing />
           <section className="mb-8">
             <h2 className="h2">Explore sound colors</h2>
             <p className="body-large text-[var(--color-text-muted)]">Short, accurate definitions and simple previews for common sound colors.</p>
