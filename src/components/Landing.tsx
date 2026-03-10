@@ -1,10 +1,6 @@
 import React from 'react'
 import Container from './layout/Container'
-import SoundCard from './SoundCard'
-import { SOUNDS } from '../data/sounds'
-
-export default function Landing(){
-  const example = SOUNDS[0]
+export default function Landing()
   return (
     <div className="py-16">
       <Container>
@@ -42,7 +38,7 @@ export default function Landing(){
 
         <section>
           <h2 className="h3 mb-4">Example</h2>
-          <SoundCard sound={example} />
+          <div className="p-6 bg-[var(--color-panel)] rounded-lg shadow-md">Sound previews are temporarily disabled.</div>
         </section>
       </Container>
     </div>
