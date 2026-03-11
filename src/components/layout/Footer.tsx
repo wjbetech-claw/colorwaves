@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-export default function Footer(){
+export default function Footer() {
   return (
-    <footer className="mt-12 py-6 text-center text-sm text-[var(--color-text-muted)]">
-      <div className="mx-auto px-4" style={{maxWidth:980}}>
-        <p>Colorwaves — Minimal sound color explorer. Built with Vite, TypeScript, Tailwind, daisyUI.</p>
+    <footer className="border-t border-base-300 bg-base-100/20 px-4 py-6 backdrop-blur-md md:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 text-center md:flex-row md:text-left">
+        <p className="font-body text-sm text-base-content">Colorwaves</p>
+        <p className="font-body text-xs text-base-content">
+          Sound-color explorer built with React, TypeScript, Tailwind, and daisyUI.
+        </p>
       </div>
     </footer>
-  )
+  );
 }
