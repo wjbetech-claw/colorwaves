@@ -126,16 +126,14 @@ export default function ThemeToggler() {
         aria-expanded={open}
         className="flex h-11 items-center gap-3 rounded-xl border border-secondary bg-base-100 px-3.5 text-primary-content shadow-lg backdrop-blur-md transition-colors hover:border-primary/50 hover:bg-base-100/35"
         onClick={() => setOpen((v) => !v)}>
-        <span className="flex items-center gap-2.5">
-          <span
-            aria-hidden
-            className="h-3 w-3 rounded-full ring-2 ring-base-content/30"
-            style={{ backgroundColor: THEME_SWATCHES[theme] }}
-          />
-          <span className="font-display text-[0.72rem] uppercase tracking-[0.14em] text-base-content">Theme</span>
+        <span
+          aria-hidden
+          className="h-3 w-3 rounded-full ring-2 ring-base-content/30"
+          style={{ backgroundColor: THEME_SWATCHES[theme] }}
+        />
+        <span className="flex flex-1 items-center justify-center text-base-content">
+          <span className="font-body text-sm normal-case leading-none">{toDisplayName(theme)}</span>
         </span>
-        <span aria-hidden className="h-5 w-px bg-base-300" />
-        <span className="font-body text-sm leading-none normal-case text-primary">{toDisplayName(theme)}</span>
       </button>
 
       {open && (
