@@ -1,29 +1,58 @@
-import React, {useState} from 'react'
-import { SOUNDS } from '../../data/sounds'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { SOUNDS } from "../../data/sounds";
 
-export default function SubNav(){
-  const [open,setOpen]=useState(false)
+export default function SubNav() {
+  const [open, setOpen] = useState(false);
   return (
-    <nav className="border-b border-[var(--color-border)] bg-[var(--color-bg)]">
-      <div className="mx-auto px-8 sm:px-12 max-w-[1100px]">
-        {/* Desktop: horizontal list */}
-        <div className="hidden md:flex items-center gap-6 overflow-x-auto py-3">
-          {SOUNDS.map(s=> (
-            <a key={s.id} href={`#${s.id}`} className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition">{s.name}</a>
+    <nav className="backdrop-blur-sm">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 text-xs uppercase tracking-[0.35em] text-base-content/50 md:flex-row md:items-center md:justify-center">
+        <div className="hidden md:flex w-full flex-wrap items-center justify-center gap-3">
+          {SOUNDS.map((sound) => (
+            <Link
+              key={sound.id}
+              to={`/colors/${sound.id}`}
+              className="rounded-md border border-base-content/20 px-3 py-1 text-[0.65rem] font-semibold tracking-[0.3em] text-base-content/80 transition hover:border-primary hover:text-primary">
+              {sound.name}
+            </Link>
           ))}
         </div>
 
-        {/* Mobile: centered dropdown */}
-        <div className="md:hidden flex justify-center py-3">
+        <div className="md:hidden flex justify-center">
           <div className="relative">
-            <button type="button" className="px-4 py-2 rounded bg-[var(--color-panel)] border border-[var(--color-border)]" onClick={()=>setOpen(o=>!o)} aria-haspopup="menu" aria-expanded={open}>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-lg border border-base-300 bg-base-100 px-4 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-base-content shadow-sm transition hover:border-primary hover:text-primary"
+              onClick={() => setOpen((o) => !o)}
+              aria-haspopup="menu"
+              aria-expanded={open}>
               Colors
+              <svg
+                className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`}
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
             </button>
+
             {open && (
-              <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-[var(--color-panel)] border border-[var(--color-border)] rounded shadow-lg z-40">
-                <div className="flex flex-col max-h-56 overflow-auto">
-                  {SOUNDS.map(s=> (
-                    <a key={s.id} onMouseDown={(e)=>{e.preventDefault(); setOpen(false)}} href={`#${s.id}`} className="px-4 py-3 text-sm hover:bg-[var(--color-bg)]">{s.name}</a>
+              <div className="absolute left-1/2 top-full z-40 w-56 -translate-x-1/2 rounded-2xl border border-base-300 bg-base-100 py-2 shadow-2xl">
+                <div className="flex flex-col">
+                  {SOUNDS.map((sound) => (
+                    <Link
+                      key={sound.id}
+                      to={`/colors/${sound.id}`}
+                      onMouseDown={(event) => {
+                        event.preventDefault();
+                        setOpen(false);
+                      }}
+                      className="px-4 py-2 text-sm text-base-content/80 transition hover:bg-base-200/60">
+                      {sound.name}
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -32,5 +61,5 @@ export default function SubNav(){
         </div>
       </div>
     </nav>
-  )
+  );
 }

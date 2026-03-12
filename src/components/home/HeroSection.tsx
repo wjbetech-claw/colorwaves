@@ -6,7 +6,10 @@ type HeroSectionProps = {
 
 export default function HeroSection({ onViewExample }: HeroSectionProps) {
   return (
-    <section id="home" className="hero min-h-screen px-4 py-16">
+    <section
+      id="home"
+      className="hero flex min-h-[calc(100vh-10rem)] px-4 py-16"
+      style={{ minHeight: "calc(100vh - 10rem)" }}>
       <div className="hero-content w-full max-w-6xl text-center">
         <div>
           <span className="font-display items-center badge badge-outline border-base-300 px-4 py-4 text-[0.8rem] uppercase tracking-[0.15em] text-base-content">
