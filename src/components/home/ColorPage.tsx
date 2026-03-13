@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { SOUNDS } from "../../data/sounds";
 
 export default function ColorPage() {
   const { id } = useParams();
   const sound = SOUNDS.find((entry) => entry.id === id);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   if (!sound) {
     return (
@@ -22,7 +23,10 @@ export default function ColorPage() {
     );
   }
 
-  const headerColor = sound.id === "white" ? "#b9bcc4" : sound.accent ?? "#38bdf8";
+  const headerColor = sound.id === "white" ? "#b9bcc4" : (sound.accent ?? "#38bdf8");
+  const sampleUrl =
+    sound.sampleUrl ??
+    "https://cdn.pixabay.com/download/audio/2020/08/12/audio_07d1d5c1f5.mp3?filename=atmosphere-10802.mp3";
 
   const detailedUses: Record<string, string> = {
     Focus: "Layered ambient content creates a steady foundation to hold attention in longer sessions.",
@@ -38,6 +42,10 @@ export default function ColorPage() {
     "Testing audio chains": "Sharp, high-frequency content reveals distortion or anomalies in signal paths.",
     "Tonal masking in some cases": "Strategic spectral emphasis covers specific bands while letting other cues through."
   };
+
+  useEffect(() => {
+    audioRef.current?.load();
+  }, [sampleUrl]);
 
   return (
     <section className="min-h-screen px-12 py-16">
@@ -83,6 +91,20 @@ export default function ColorPage() {
             frequencies to skew the power spectrum toward {sound.tone.split(" ")[0].toLowerCase()}-range behavior,
             inviting either calm or clarity depending on your intent.
           </p>
+        </div>
+
+        <div className="space-y-6 rounded-3xl bg-base-100/40 p-8 text-base-content/90">
+          <h2 className="font-display text-2xl" style={{ color: headerColor }}>
+            Listen
+          </h2>
+          <p className="text-sm text-base-content/70">
+            Preview about 12 seconds of the {sound.name} profile to feel how it drifts through the frequency spectrum.
+            Use headphones for the best stereo details.
+          </p>
+          <audio ref={audioRef} className="w-full rounded-2xl" controls preload="auto" crossOrigin="anonymous">
+            <source src={sampleUrl} type="audio/mpeg" />
+            Your browser does not support the <code>audio</code> element.
+          </audio>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
