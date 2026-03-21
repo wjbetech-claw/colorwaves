@@ -1,74 +1,80 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import NoisePreview from "../audio/NoisePreview";
+import { SOUNDS } from "../../data/sounds";
 
-const VISUALIZER_BASE = [12, 10, 14, 11, 13, 12, 9, 11, 10, 8, 7, 10];
+const FEATURED_SOUNDS = SOUNDS.filter((sound) => sound.generatorType);
 
 export default function ExampleSoundCard() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const levels = useMemo(() => {
-    if (!isPlaying) {
-      return VISUALIZER_BASE;
-    }
+  const [selectedId, setSelectedId] = useState(FEATURED_SOUNDS[1]?.id ?? FEATURED_SOUNDS[0]?.id ?? "white");
+  const selectedSound = FEATURED_SOUNDS.find((sound) => sound.id === selectedId) ?? FEATURED_SOUNDS[0];
 
-    return VISUALIZER_BASE.map((value) => value + Math.floor(Math.random() * 12));
-  }, [isPlaying]);
+  if (!selectedSound || !selectedSound.generatorType) {
+    return null;
+  }
 
   return (
-    <article className="card border border-base-100/15 bg-base-200/40 shadow-2xl backdrop-blur-md">
-      <div className="card-body gap-5">
-        <div className="h-2 w-full rounded-full bg-[linear-gradient(90deg,#fb7185_0%,#fcd34d_30%,#6ee7b7_58%,#22d3ee_80%,#a78bfa_100%)]" />
-
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-display card-title text-2xl text-accent">Aurora Drift</h3>
-          <span className="font-display badge badge-outline border-cyan-300/60 px-3 py-3 text-[0.72rem] uppercase tracking-[0.08em] text-secondary">
-            432 Hz • Ambient
-          </span>
+    <article className="rounded-[2rem] border border-base-100/15 bg-base-200/30 p-6 shadow-2xl backdrop-blur-md">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="max-w-2xl">
+          <p className="font-display text-xs uppercase tracking-[0.22em] text-base-content/55">Featured noise lab</p>
+          <h3 className="font-display mt-3 text-3xl text-primary">{selectedSound.name}</h3>
+          <p className="font-body mt-3 text-base leading-relaxed text-base-content/80">{selectedSound.description}</p>
         </div>
+        <span
+          className="rounded-full border px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-base-content/70"
+          style={{ borderColor: selectedSound.accent }}>
+          {selectedSound.evidenceLevel}
+        </span>
+      </div>
 
-        <p className="font-body text-base-content">
-          Soft evolving pads with low shimmer and wide stereo motion for deep focus sessions.
-        </p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {FEATURED_SOUNDS.map((sound) => (
+          <button
+            key={sound.id}
+            type="button"
+            className={`rounded-full border px-4 py-2 text-sm transition ${
+              sound.id === selectedSound.id
+                ? "border-transparent bg-base-100 text-base-content shadow-lg"
+                : "border-base-100/20 bg-base-100/5 text-base-content/70 hover:border-base-100/40 hover:text-base-content"
+            }`}
+            onClick={() => setSelectedId(sound.id)}>
+            {sound.name}
+          </button>
+        ))}
+      </div>
 
-        <div className="rounded-xl border border-base-300 bg-base-100/20 p-3">
-          <p className="font-display text-xs uppercase tracking-[0.14em] text-base-content">Reactive visualizer</p>
-          <div className="mt-3 flex h-12 items-end gap-1.5">
-            {levels.map((h, i) => (
-              <span
-                key={`${h}-${i}`}
-                className={`w-2.5 rounded-t bg-gradient-to-t from-cyan-500 via-sky-400 to-emerald-300 transition-all duration-200 ${
-                  isPlaying ? "opacity-100" : "opacity-40"
-                }`}
-                style={{ height: `${h}px` }}
-              />
-            ))}
+      <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <NoisePreview
+          generator={selectedSound.generatorType}
+          label={selectedSound.name}
+          accent={selectedSound.accent}
+          detail={selectedSound.spectralProfile}
+        />
+
+        <div className="space-y-5 rounded-3xl border border-base-100/10 bg-base-100/10 p-5">
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.18em] text-base-content/55">How it feels</p>
+            <p className="font-body mt-2 text-sm leading-relaxed text-base-content/80">{selectedSound.tone}</p>
           </div>
-        </div>
 
-        <div className="card-actions justify-end">
-          <div className="text-right">
-            <p className="font-body text-sm text-base-content">8s preview</p>
-            <button
-              className="btn btn-primary mt-2 flex items-center gap-2"
-              onClick={() => setIsPlaying((prev) => !prev)}>
-              <svg
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round">
-                {isPlaying ? (
-                  <>
-                    <rect x="6" y="6" width="4" height="12" />
-                    <rect x="14" y="6" width="4" height="12" />
-                  </>
-                ) : (
-                  <path d="M7 5v14l11-7z" />
-                )}
-              </svg>
-              {isPlaying ? "Pause" : "Play"}
-            </button>
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.18em] text-base-content/55">Everyday example</p>
+            <p className="font-body mt-2 text-sm leading-relaxed text-base-content/80">
+              {selectedSound.everydayExample}
+            </p>
           </div>
+
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.18em] text-base-content/55">What research says</p>
+            <p className="font-body mt-2 text-sm leading-relaxed text-base-content/80">
+              {selectedSound.researchSummary}
+            </p>
+          </div>
+
+          <Link className="btn btn-outline btn-sm w-full" to={`/colors/${selectedSound.id}`}>
+            Open full explainer
+          </Link>
         </div>
       </div>
     </article>

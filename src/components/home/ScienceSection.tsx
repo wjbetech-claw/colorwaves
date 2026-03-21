@@ -33,12 +33,12 @@ export default function ScienceSection() {
             The Science Behind Sound Color
           </span>
           <h2 className="font-display mx-auto mt-5 max-w-3xl text-3xl font-semibold leading-tight text-primary md:text-5xl">
-            Different frequency profiles can shape sleep, focus, and perceived calm.
+            Different frequency profiles can change masking, comfort, and perceived calm.
           </h2>
           <p className="font-body mx-auto mt-5 max-w-3xl text-base leading-relaxed text-base-content md:text-lg">
-            White, pink, and other noise profiles are actively studied in sleep and cognitive science. The effects vary
-            by person and context, but the mechanism is measurable: spectral content changes what the brain hears and
-            how it responds over time.
+            White and pink noise show up most often in sleep and auditory research. Other labels are still useful to
+            learn, but they do not all carry the same level of evidence, so this site separates supported findings from
+            technical terminology and personal preference.
           </p>
 
           <div className="mt-10 grid gap-4 text-left md:grid-cols-3">

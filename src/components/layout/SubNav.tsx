@@ -46,10 +46,7 @@ export default function SubNav() {
                     <Link
                       key={sound.id}
                       to={`/colors/${sound.id}`}
-                      onMouseDown={(event) => {
-                        event.preventDefault();
-                        setOpen(false);
-                      }}
+                      onClick={() => setOpen(false)}
                       className="px-4 py-2 text-sm text-base-content/80 transition hover:bg-base-200/60">
                       {sound.name}
                     </Link>
